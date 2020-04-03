@@ -9,6 +9,7 @@
 </template>
 
 <style lang="scss">
-@import url(scss/main.scss);
+@import url(scss/normalize.css);
+@import url(scss/dist/main.css);
 
 </style>

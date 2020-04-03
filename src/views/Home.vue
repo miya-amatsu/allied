@@ -18,8 +18,6 @@ export default {
    },
    mounted(){
       console.log("Homemounted");
-     console.log(YoutubeList);
-     console.log(YoutubeList.data);
    }
 }
 </script>
