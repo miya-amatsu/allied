@@ -58,23 +58,25 @@
 
     },
     updated() {
-      const vm = this;
+      // const vm = this;
       // vm.getYoutubeObj(vm._data.nextPageToken)
-      if (vm.thislist.length < 2) {
-        vm.thislistFun()
-      }
+      // if (vm.thislist.length < 2) {
+      //   vm.thislistFun()
+      // }
     },
     computed: {},
 
     methods: {
       getYoutubeObj(pageToken = "") {
         const vm = this;
+        let tag = localStorage.getItem("id")
+        console.log(tag);
+        
         // `part=snippet,contentDetails`
         //`part=id,player`
         let url = `https://www.googleapis.com/youtube/v3/videos?` +
           `part=snippet,contentDetails` +
-          `&chart=mostPopular` +
-          `&maxResults=${vm.maxResults}` +
+          `&id=${tag}` +
           `&pageToken=${pageToken}` +
           `&key=${key.key}`;
         vm.$http.get(url).then((res) => {
@@ -102,9 +104,9 @@
           })
           vm.nextPageToken = res.data.nextPageToken;
           vm.prevPageToken = res.data.prevPageToken;
-          if (vm.ListObj.length < vm.maxListResults) {
-            vm.getYoutubeObj(vm.nextPageToken)
-          }
+          // if (vm.ListObj.length < vm.maxListResults) {
+          //   vm.getYoutubeObj(vm.nextPageToken)
+          // }
         }).catch(function (error) {
           console.log(error);
         })

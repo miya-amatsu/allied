@@ -14,10 +14,11 @@ export default {
     YoutubeList
   },
    created(){
-     console.log("Homecreated");
+     
+     
    },
    mounted(){
-      console.log("Homemounted");
+     
    }
 }
 </script>

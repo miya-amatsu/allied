@@ -1,6 +1,18 @@
 <template>
   <div class="about">
-    <h1>collect</h1>
-
+    <CollectCompon />
   </div>
 </template>
+<script>
+import CollectCompon from '@/components/CollectCompon.vue'
+export default {
+   name: 'collect',
+     components: {
+    CollectCompon
+  },data(){
+    return{
+       
+    }
+  }
+}
+</script>

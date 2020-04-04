@@ -31,6 +31,7 @@ $font-md:16px;
 .flex {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .browse {
@@ -41,6 +42,8 @@ $font-md:16px;
     text-align: left;
     padding:20px 20px;
     overflow: hidden;
+    margin: 2px;
+    box-shadow:0 0 3px 5px #000 inset;
 
     img {
       background: rgb(88, 88, 88);
@@ -63,6 +66,23 @@ $font-md:16px;
     }
     .video-text{
       padding: 0px 0px;
+
+      .video-text-content{
+        width: calc(100% - 40px)
+      }
+    }
+  }
+}
+.video-text{
+  flex-wrap: nowrap;
+  align-items: center;
+  .collect-renderer{
+    padding-right: 10px;
+    height: 28px;
+    margin-top: 16px;
+    img{
+      width:30px;
+      background:transparent;
     }
   }
 }
@@ -80,20 +100,20 @@ $font-md:16px;
 }
 @media screen and (min-width: 769px) {
   .col-sm-6 {
-    width: 50%;
+    width: 48%;
   }
   .video-renderer {
-    width: 50%;
+    width: 48%;
   }
 }
 
 @media screen and (min-width: 992px) {
   .video-renderer {
-    width: 33%;
+    width: 31%;
   }
 }
 @media screen and (min-width: 1200px) {
   .video-renderer {
-    width: 25%;
+    width: 23%;
   }
 }
