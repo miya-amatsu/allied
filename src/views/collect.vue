@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <CollectCompon />
+  <div class="collect">
+    <CollectCompon v-bind:root="post.root" />
   </div>
 </template>
 <script>
@@ -11,7 +11,7 @@ export default {
     CollectCompon
   },data(){
     return{
-       
+        post:{root:window.location.href.substr(0,window.location.href.indexOf('collect'))}
     }
   }
 }

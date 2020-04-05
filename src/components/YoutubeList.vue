@@ -1,10 +1,12 @@
 <template>
   <div>
     <h1>YoutubeList</h1>
+
     <div class="flex browse">
       <div id="video-renderer" class="video-renderer" v-for="(item) in thislistFun(stayPage)" :key="item.id">
-        <!-- <a v-bind:href="'https://www.youtube.com/watch?v='+item.id"> -->
+        <a v-bind:href="root+'video?v='+item.id">
         <img v-bind:src="item.snippet.thumbnails.medium.url" alt="">
+        </a>
         <div class="video-text flex">
           <div class="collect-renderer" v-on:click="thislistFun (stayPage),collectList(item.id)">
             <img v-if="item.collect" src="@/assets/liked-icon.svg">
@@ -16,7 +18,7 @@
             <p class="">{{item.snippet.description}}</p>
           </div>
         </div>
-        <!-- </a> -->
+        
       </div>
     </div>
     <ul class="flex page">
@@ -32,7 +34,9 @@
   import testDataJson from '@/assets/test.json'
   export default {
     name: 'YoutubeList',
-    props: {},
+    props: {
+      root: String
+    },
     data() {
       return {
         ListObj: "",
@@ -48,26 +52,24 @@
     },
 
     created() {
-      console.log(sessionStorage.getItem('getYoutubeObj'));
-      if (!sessionStorage.getItem('getYoutubeObj')) {
-        console.log(!sessionStorage.getItem('getYoutubeObj'));
         this.getYoutubeObj();
-      }
+        console.log('YOUroot');
+         console.log(this.root);
+        
+        
     },
     mounted() {
 
     },
     updated() {
-      const vm = this;
-      // vm.getYoutubeObj(vm._data.nextPageToken)
-      if (vm.thislist.length < 2) {
-        vm.thislistFun()
-      }
+
     },
     computed: {},
 
     methods: {
       getYoutubeObj(pageToken = "") {
+        console.log('get');
+
         const vm = this;
         // `part=snippet,contentDetails`
         //`part=id,player`
@@ -91,15 +93,18 @@
             vm.ListObj = JSON.parse(strVM);
           }
           let tag = localStorage.getItem("id")
-          vm.ListObj.map(x => {
-            let id = x.id;
-            let str = tag.indexOf(id);
-            if (str == -1) {
-              x.collect = false;
-            } else if (str != -1) {
-              x.collect = true;
-            }
-          })
+          if (tag) {
+            vm.ListObj.map(x => {
+              let id = x.id;
+              let str = tag.indexOf(id);
+              if (str == -1) {
+                x.collect = false;
+              } else if (str != -1) {
+                x.collect = true;
+              }
+            })
+          }
+
           vm.nextPageToken = res.data.nextPageToken;
           vm.prevPageToken = res.data.prevPageToken;
           if (vm.ListObj.length < vm.maxListResults) {
@@ -148,10 +153,16 @@
         return Math.ceil(this._data.ListObj.length / videoAmount)
       },
       collectList(id = "") {
+        console.log('hit');
+        
         let vm = this;
         let tag = localStorage.getItem("id")
         if (id != "") {
-          let str = tag.indexOf(id);
+          let str=-1;
+          if(tag){
+             str = tag.indexOf(id);
+          }
+          
           if (str == -1) {
             tag = tag + `,${id}`
             localStorage.setItem("id", tag)

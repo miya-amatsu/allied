@@ -11,5 +11,8 @@
 <style lang="scss">
 @import url(scss/normalize.css);
 @import url(scss/dist/main.css);
-
 </style>
+<script>
+
+
+</script>
